@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -21,15 +21,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet für die Startseite mit dem Übersichts-Dashboard.
- */
 @WebServlet(urlPatterns = {"/app/dashboard/"})
 public class DashboardServlet extends HttpServlet {
 
-    // Kacheln für Aufgaben
-    @EJB(beanName = "tasks")
-    DashboardContentProvider taskContent;
+    // Kacheln für Filme
+    @EJB(beanName = "movies")
+    DashboardContentProvider movieContent;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,10 +36,11 @@ public class DashboardServlet extends HttpServlet {
         List<DashboardSection> sections = new ArrayList<>();
         request.setAttribute("sections", sections);
         
-        taskContent.createDashboardContent(sections);
+        movieContent.createDashboardContent(sections);
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/dashboard/dashboard.jsp").forward(request, response);
     }
 
 }
+

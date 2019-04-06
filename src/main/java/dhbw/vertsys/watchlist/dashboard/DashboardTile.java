@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -9,9 +9,6 @@
  */
 package dhbw.vertsys.watchlist.dashboard;
 
-/**
- * Hilfsklasse zur Beschreibung einer Dashboard-Kachel.
- */
 public class DashboardTile {
 
     private String label = "";
