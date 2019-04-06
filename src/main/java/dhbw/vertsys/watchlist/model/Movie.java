@@ -12,6 +12,7 @@ package dhbw.vertsys.watchlist.model;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Data;
 
+@Data
+@Entity
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +62,7 @@ public class Movie implements Serializable {
     public Movie() {
     }
 
-    public Movie(User owner, Category category, String movieTitle, String movieDescripton, Date creationDate) {
+    public Movie(User owner, Category category, String movieTitle, String movieDescription, Date creationDate) {
         this.owner = owner;
         this.category = category;
         this.movieTitle = movieTitle;

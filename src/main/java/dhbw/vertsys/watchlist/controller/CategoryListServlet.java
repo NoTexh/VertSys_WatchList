@@ -1,11 +1,20 @@
+/*
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
 package dhbw.vertsys.watchlist.controller;
 
-import dhbw.vertsys.watchlist.web.FormValues;
 import dhbw.vertsys.watchlist.ejb.CategoryBean;
-import dhbw.vertsys.watchlist.ejb.TaskBean;
+import dhbw.vertsys.watchlist.ejb.MovieBean;
 import dhbw.vertsys.watchlist.ejb.ValidationBean;
 import dhbw.vertsys.watchlist.model.Category;
-import dhbw.vertsys.watchlist.model.Task;
+import dhbw.vertsys.watchlist.model.Movie;
+import dhbw.vertsys.watchlist.web.FormValues;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -17,19 +26,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Seite zum Anzeigen und Bearbeiten der Kategorien. Die Seite besitzt ein
- * Formular, mit dem ein neue Kategorie angelegt werden kann, sowie eine Liste,
- * die zum Löschen der Kategorien verwendet werden kann.
- */
-@WebServlet(urlPatterns = {"/app/tasks/categories/"})
+@WebServlet(urlPatterns = {"/app/movies/categories/"})
 public class CategoryListServlet extends HttpServlet {
 
     @EJB
     CategoryBean categoryBean;
 
     @EJB
-    TaskBean taskBean;
+    MovieBean movieBean;
 
     @EJB
     ValidationBean validationBean;
@@ -42,7 +46,7 @@ public class CategoryListServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/tasks/category_list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/movies/category_list.jsp");
         dispatcher.forward(request, response);
 
         // Alte Formulardaten aus der Session entfernen
@@ -140,12 +144,12 @@ public class CategoryListServlet extends HttpServlet {
             }
 
             // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
-            List<Task> tasks = category.getTasks();
+            List<Movie> movies = category.getMovies();
 
-            if (tasks != null) {
-                tasks.forEach((Task task) -> {
-                    task.setCategory(null);
-                    this.taskBean.update(task);
+            if (movies != null) {
+                movies.forEach((Movie movie) -> {
+                    movie.setCategory(null);
+                    this.movieBean.update(movie);
                 });
             }
 

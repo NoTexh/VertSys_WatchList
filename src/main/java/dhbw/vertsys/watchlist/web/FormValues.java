@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2019 Markus Scheuring, Kai Schmid, Tobias Frietsch
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * @author Kai
+ */
+/**
  * Kleine Hilfsklasse, die als Objekt in der HTTP-Session abgelegt werden
  * kann, um die fehlerhaften Eingaben eines Formulars zwischenzuspeichern.
  */
@@ -22,12 +26,12 @@ public class FormValues {
     
     private Map<String, String[]> values = new HashMap<>();
     private List<String> errors = new ArrayList<>();
-
+ 
     //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
     public Map<String, String[]> getValues() {
         return values;
-    }
-    
+}
+
     public void setValues(Map<String, String[]> values) {
         // Werte kopieren, da eine direkte Zuweisung die Werte wieder verliert,
         // wenn die Methode mit request.getParameterMap() aufgerufen wird!
