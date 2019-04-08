@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -31,54 +22,43 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <div class="container">
-            <form method="post" class="stacked">
-                <div class="column">
+        <div class="row">
+            <div class="col"></div>
+            <div class="signup-form col-6">
+                <form method="post" class="stacked">
                     <%-- CSRF-Token --%>
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
-
-                    <%-- Eingabefelder --%>
-                    <label for="signup_username">
-                        Benutzername:
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="signup_username" value="${signup_form.values["signup_username"][0]}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="signup_firstname" placeholder="Vorname" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="signup_lastname" placeholder="Nachname" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="signup_username" placeholder="Benutzername" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="signup_password1" placeholder="Passwort" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="signup_password2" placeholder="Passwort wiederholen" required="required">
+                    </div>        
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block">Jetzt Registrieren</button>
                     </div>
 
-                    <label for="signup_password1">
-                        Passwort:
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="password" name="signup_password1" value="${signup_form.values["signup_password1"][0]}">
-                    </div>
+                    <%-- Fehlermeldung --%>
+                    <c:if test="${!empty signup_form.errors}">
+                        <ul class="errors">
+                            <c:forEach items="${signup_form.errors}" var="error">
+                                <li>${error}</li>
+                                </c:forEach>
+                        </ul>
+                    </c:if>
 
-                    <label for="signup_password2">
-                        Passwort (wdh.):
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="password" name="signup_password2" value="${signup_form.values["signup_password2"][0]}">
-                    </div>
-
-                    <%-- Button zum Abschicken --%>
-                    <div class="side-by-side">
-                        <button class="icon-pencil" type="submit">
-                            Registrieren
-                        </button>
-                    </div>
-                </div>
-
-                <%-- Fehlermeldungen --%>
-                <c:if test="${!empty signup_form.errors}">
-                    <ul class="errors">
-                        <c:forEach items="${signup_form.errors}" var="error">
-                            <li>${error}</li>
-                            </c:forEach>
-                    </ul>
-                </c:if>
-            </form>
+                </form>
+            </div>
+            <div class="col"></div>
         </div>
     </jsp:attribute>
 </template:base>
