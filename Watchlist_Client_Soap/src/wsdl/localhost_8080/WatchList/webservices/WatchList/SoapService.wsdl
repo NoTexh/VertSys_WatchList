@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.jtodo.javaee.vertsys.wwi.dhbw/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SoapServiceService" targetNamespace="http://soap.jtodo.javaee.vertsys.wwi.dhbw/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.jtodo.javaee.vertsys.wwi.dhbw/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://soap.jtodo.javaee.vertsys.wwi.dhbw/">
+  <xs:element name="deleteMovie" type="tns:deleteMovie"/>
+  <xs:element name="deleteMovieResponse" type="tns:deleteMovieResponse"/>
+  <xs:element name="findMovies" type="tns:findMovies"/>
+  <xs:element name="findMoviesResponse" type="tns:findMoviesResponse"/>
+  <xs:element name="saveNewMovie" type="tns:saveNewMovie"/>
+  <xs:element name="saveNewMovieResponse" type="tns:saveNewMovieResponse"/>
+  <xs:element name="updateExistingMovie" type="tns:updateExistingMovie"/>
+  <xs:element name="updateExistingMovieResponse" type="tns:updateExistingMovieResponse"/>
+  <xs:complexType name="deleteMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="movie" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="category" type="tns:category"/>
+      <xs:element minOccurs="0" name="creationDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="movieDescripton" type="xs:string"/>
+      <xs:element name="movieId" type="xs:long"/>
+      <xs:element minOccurs="0" name="movieStatus" type="tns:movieStatus"/>
+      <xs:element minOccurs="0" name="movieTitle" type="xs:string"/>
+      <xs:element minOccurs="0" name="owner" type="tns:user"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="category">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="movies" nillable="true" type="tns:movie"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="tasks" nillable="true" type="tns:task"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="task">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="category" type="tns:category"/>
+      <xs:element minOccurs="0" name="dueDate" type="tns:date"/>
+      <xs:element minOccurs="0" name="dueTime" type="tns:time"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="longText" type="xs:string"/>
+      <xs:element minOccurs="0" name="owner" type="tns:user"/>
+      <xs:element minOccurs="0" name="shortText" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="tns:taskStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="date">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="time">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="deleteMovieResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="saveNewMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="movie" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="saveNewMovieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="movie" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findMovies">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findMoviesResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="movies" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateExistingMovie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="movie" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateExistingMovieResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="movie" type="tns:movie"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="movieStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GESEHEN"/>
+      <xs:enumeration value="NICHT_GESEHEN"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="taskStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OPEN"/>
+      <xs:enumeration value="IN_PROGRESS"/>
+      <xs:enumeration value="FINISHED"/>
+      <xs:enumeration value="CANCELED"/>
+      <xs:enumeration value="POSTPONED"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="InvalidCredentialsException" type="tns:InvalidCredentialsException"/>
+  <xs:complexType name="InvalidCredentialsException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="username" nillable="true" type="xs:string"/>
+  <xs:element name="password" nillable="true" type="xs:string"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="InvalidCredentialsException">
+    <wsdl:part element="tns:InvalidCredentialsException" name="InvalidCredentialsException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveNewMovieResponse">
+    <wsdl:part element="tns:saveNewMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteMovie">
+    <wsdl:part element="tns:deleteMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findMovies">
+    <wsdl:part element="tns:findMovies" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="findMoviesResponse">
+    <wsdl:part element="tns:findMoviesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateExistingMovie">
+    <wsdl:part element="tns:updateExistingMovie" name="parameters">
+    </wsdl:part>
+    <wsdl:part element="tns:username" name="username">
+    </wsdl:part>
+    <wsdl:part element="tns:password" name="password">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateExistingMovieResponse">
+    <wsdl:part element="tns:updateExistingMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteMovieResponse">
+    <wsdl:part element="tns:deleteMovieResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveNewMovie">
+    <wsdl:part element="tns:saveNewMovie" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SoapService">
+    <wsdl:operation name="deleteMovie">
+      <wsdl:input message="tns:deleteMovie" name="deleteMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteMovieResponse" name="deleteMovieResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:InvalidCredentialsException" name="InvalidCredentialsException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="saveNewMovie">
+      <wsdl:input message="tns:saveNewMovie" name="saveNewMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:saveNewMovieResponse" name="saveNewMovieResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:InvalidCredentialsException" name="InvalidCredentialsException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findMovies">
+      <wsdl:input message="tns:findMovies" name="findMovies">
+    </wsdl:input>
+      <wsdl:output message="tns:findMoviesResponse" name="findMoviesResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:InvalidCredentialsException" name="InvalidCredentialsException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExistingMovie">
+      <wsdl:input message="tns:updateExistingMovie" name="updateExistingMovie">
+    </wsdl:input>
+      <wsdl:output message="tns:updateExistingMovieResponse" name="updateExistingMovieResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:InvalidCredentialsException" name="InvalidCredentialsException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SoapServiceServiceSoapBinding" type="tns:SoapService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidCredentialsException">
+        <soap:fault name="InvalidCredentialsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="saveNewMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveNewMovie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveNewMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidCredentialsException">
+        <soap:fault name="InvalidCredentialsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findMovies">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="findMovies">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findMoviesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidCredentialsException">
+        <soap:fault name="InvalidCredentialsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExistingMovie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateExistingMovie">
+        <soap:header message="tns:updateExistingMovie" part="username" use="literal">
+        </soap:header>
+        <soap:header message="tns:updateExistingMovie" part="password" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateExistingMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidCredentialsException">
+        <soap:fault name="InvalidCredentialsException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SoapServiceService">
+    <wsdl:port binding="tns:SoapServiceServiceSoapBinding" name="SoapServicePort">
+      <soap:address location="http://localhost:8080/WatchList/webservices/WatchList/SoapService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
