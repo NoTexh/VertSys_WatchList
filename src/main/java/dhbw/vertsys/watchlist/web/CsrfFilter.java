@@ -1,12 +1,3 @@
-/*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbw.vertsys.watchlist.web;
 
 import java.io.IOException;
@@ -32,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * Vgl. https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery Vgl.
  * https://dzone.com/articles/preventing-csrf-java-web-apps
  */
-@WebFilter(filterName = "CsrfFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "CsrfFilter", urlPatterns = {"/app/*"})
 public class CsrfFilter implements Filter {
 
     public static final int MAX_CACHE_SIZE = 500;
