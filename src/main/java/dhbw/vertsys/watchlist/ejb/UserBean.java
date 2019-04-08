@@ -89,6 +89,7 @@ public class UserBean {
             return "Gültiger Benutzer";
         }
     }
+
     /**
      * Fehler: Der Benutzername ist bereits vergeben
      */
