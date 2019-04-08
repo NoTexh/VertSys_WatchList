@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserBean {
 
-    @PersistenceContext
+   @PersistenceContext
     EntityManager em;
     
     @Resource
@@ -36,12 +36,12 @@ public class UserBean {
      * @param password
      * @throws UserBean.UserAlreadyExistsException
      */
-    public void signup(String username, String password) throws UserAlreadyExistsException {
+    public void signup(String firstname, String lastname, String username, String password) throws UserAlreadyExistsException {
         if (em.find(User.class, username) != null) {
             throw new UserAlreadyExistsException("Der Benutzername $B ist bereits vergeben.".replace("$B", username));
         }
 
-        User user = new User(username, password);
+        User user = new User(firstname, lastname, username, password);
         user.addToGroup("app-user");
         em.persist(user);
     }
@@ -80,7 +80,15 @@ public class UserBean {
     public User update(User user) {
         return em.merge(user);
     }
-
+    
+    public String validateUser(String username,String password) throws InvalidCredentialsException{
+        User user = em.find(User.class, username);
+        if(user == null || !user.checkPassword(password)){
+            throw new InvalidCredentialsException("ungültige Benutzerdaten");
+        }else{
+            return "Gültiger Benutzer";
+        }
+    }
     /**
      * Fehler: Der Benutzername ist bereits vergeben
      */
