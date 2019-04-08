@@ -1,19 +1,10 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package dhbw.vertsys.watchlist.dashboard;
 
-import dhbw.vertsys.watchlist.ejb.CategoryBean;
-import dhbw.vertsys.watchlist.ejb.TaskBean;
-import dhbw.vertsys.watchlist.web.WebUtils;
 import dhbw.vertsys.watchlist.model.Category;
-import dhbw.vertsys.watchlist.model.TaskStatus;
+import dhbw.vertsys.watchlist.ejb.CategoryBean;
+import dhbw.vertsys.watchlist.ejb.MovieBean;
+import dhbw.vertsys.watchlist.model.MovieStatus;
+import dhbw.vertsys.watchlist.web.WebUtils;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -21,14 +12,14 @@ import javax.ejb.Stateless;
 /**
  * EJB zur Definition der Dashboard-Kacheln für Aufgaben.
  */
-@Stateless(name = "tasks")
+@Stateless(name = "movies")
 public class DashboardContent implements DashboardContentProvider {
 
     @EJB
     private CategoryBean categoryBean;
 
     @EJB
-    private TaskBean taskBean;
+    private MovieBean movieBean;
 
     /**
      * Vom Dashboard aufgerufenen Methode, um die anzuzeigenden Rubriken und
@@ -82,25 +73,16 @@ public class DashboardContent implements DashboardContentProvider {
         section.getTiles().add(tile);
 
         // Ja Aufgabenstatus eine weitere Kachel erzeugen
-        for (TaskStatus status : TaskStatus.values()) {
+        for (MovieStatus status : MovieStatus.values()) {
             String cssClass1 = cssClass + " status-" + status.toString().toLowerCase();
             String icon = "";
-
+            
             switch (status) {
-                case OPEN:
+                case GESEHEN:
                     icon = "doc-text";
                     break;
-                case IN_PROGRESS:
+                case NICHT_GESEHEN:
                     icon = "rocket";
-                    break;
-                case FINISHED:
-                    icon = "ok";
-                    break;
-                case CANCELED:
-                    icon = "cancel";
-                    break;
-                case POSTPONED:
-                    icon = "bell-off-empty";
                     break;
             }
 
@@ -124,9 +106,9 @@ public class DashboardContent implements DashboardContentProvider {
      * @param icon
      * @return
      */
-    private DashboardTile createTile(Category category, TaskStatus status, String label, String cssClass, String icon) {
-        int amount = taskBean.search(null, category, status).size();
-        String href = "/app/tasks/list/";
+    private DashboardTile createTile(Category category, MovieStatus status, String label, String cssClass, String icon) {
+        int amount = movieBean.search(null, category, status).size();
+        String href = "/app/movies/list/";
 
         if (category != null) {
             href = WebUtils.addQueryParameter(href, "search_category", "" + category.getId());
@@ -145,5 +127,4 @@ public class DashboardContent implements DashboardContentProvider {
         tile.setShowDecimals(false);
         return tile;
     }
-
 }
