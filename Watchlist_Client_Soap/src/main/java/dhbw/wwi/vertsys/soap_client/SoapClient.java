@@ -5,10 +5,10 @@
  */
 package dhbw.wwi.vertsys.soap_client;
 
-import dhbw.wwi.vertsys.javaee.jtodo.soap.InvalidCredentialsException_Exception;
-import dhbw.wwi.vertsys.javaee.jtodo.soap.Movie;
-import dhbw.wwi.vertsys.javaee.jtodo.soap.SoapService;
-import dhbw.wwi.vertsys.javaee.jtodo.soap.SoapServiceService;
+import dhbw.vertsys.watchlist.soap.InvalidCredentialsException_Exception;
+import dhbw.vertsys.watchlist.soap.Movie;
+import dhbw.vertsys.watchlist.soap.SoapService;
+import dhbw.vertsys.watchlist.soap.SoapServiceService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -59,7 +59,7 @@ public class User implements Serializable {
     @NotNull(message = "Das Passwort darf nicht leer sein.")
     private String passwordHash;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "WATCHLIST_USER_GROUP",
             joinColumns = @JoinColumn(name = "USERNAME")
@@ -159,11 +159,11 @@ public class User implements Serializable {
      */
     public List<String> getGroups() {
         List<String> groupsCopy = new ArrayList<>();
-
+        if(this.groups != null){
         this.groups.forEach((groupname) -> {
             groupsCopy.add(groupname);
         });
-
+        }
         return groupsCopy;
     }
 
