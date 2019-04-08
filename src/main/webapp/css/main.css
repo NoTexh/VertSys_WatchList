@@ -1,14 +1,4 @@
 /*
-Copyright © 2018 Dennis Schulmeister-Zimolong
-
-E-Mail: dhbw@windows3.de
-Webseite: https://www.wpvs.de/
-
-Dieser Quellcode ist lizenziert unter einer
-Creative Commons Namensnennung 4.0 International Lizenz.
-*/
-
-/*
  * ALLGEMEINE LAYOUTOPTIONEN
  */
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
@@ -46,7 +36,8 @@ body {
 }
 
 header {
-    background: white;
+    background: rgba(228,228,228,0.7);
+    background-color: rgb(228,228,228);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
     position: sticky;
@@ -58,7 +49,7 @@ header, main {
 
 /* Titelzeile */
 #titlebar {
-    color: rgb(145, 204, 229);
+    color: rgba(228, 228, 228, 0.7);
     font-size: 260%;
     margin-bottom: 1rem;
 }
@@ -69,12 +60,16 @@ header, main {
     }
 }
 
+#titlebar .content{
+    color: rgb(93,93,93);
+}
+
 #titlebar > * {
     display: inline-block;
 }
 
 #titlebar .appname {
-    color: rgb(83, 149, 176);
+    color: rgb(113, 26, 26);
 }
 
 /* Menüzeile */
@@ -86,8 +81,13 @@ header, main {
 
 /* Farben für Links */
 a, a:visited {
-    color: rgb(193, 33, 33);
+    color: rgb(160,160,160);
     text-decoration: none;
+}
+
+.sectionTitle, .sectionTitle:visited {
+    color: rgb(22,133,158);
+    font-weight: bold;
 }
 
 a:hover {
