@@ -1,15 +1,16 @@
-Beispielanwendung "jTodo"
+WatchList
 =========================
 
 Kurzbeschreibung
 ----------------
-
-Dies ist ein Beispiel für eine in Java realisierte, serverseitige MVC-Webanwendung.
+Dies ist die Anwendung von Kai Schmid, Markus Scheuring und Tobias Frietsch im Rahmen der Vorlesung Verteilte Systeme.
+Dabei handelt es sich um eine in Java realisierte, serverseitige MVC-Webanwendung.
 Die Anwendung setzt dabei ganz klassisch auf der „Jakarta Enterprise Edition”
 (ehemals „Java Enterprise Edition“) auf und läuft daher in einem speziell dafür
 ausgelegten Applikationsserver. Sämtliche Anwendungslogik wird dabei vom Server
 implementiert, so dass für jedes URL-Pattern der Anwendung ein komplett serverseitig
 generierte HTML-Seite abgerufen und im Browser dargestellt wird.
+Außerdem wird eine SOAP-Schnittstelle bereitgestellt um mit einem dafür vorgesehenen Client darauf zugreifen zu können.
 
 Verwendete Technologien
 -----------------------
